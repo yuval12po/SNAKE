@@ -29,11 +29,8 @@ function getInput(){
     let userInput = prompt("plese enter a number");
     let root = Math.sqrt(userInput);
     document.writeln(root);
-
-    
        
 
 
 
 
-}
