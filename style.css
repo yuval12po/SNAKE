@@ -1,5 +1,5 @@
 body{
-    background-color: #18eedc;
+    background-color: #8a2709;
     align-items: center;
     text-align: center;
 }
@@ -20,12 +20,20 @@ body{
    height: 300px;
    margin:20px auto;
    border: 4px solid black;
+   BACKGROUND-COLOR: rgba(37, 35, 35, 0.808);
 }
 
 #grid div{  border: 0.1px solid black;border-radius: 2px; }
-snake{ background-color: rgb(95, 201, 9);}
-apple{ background-color: red;BORDER-RADIUS: 50%;}
+.snake{ 
+    background-color: rgb(95, 201, 9);border-radius:  2px; }
+.apple{ 
+    background-color: red;
+    border-radius: 50%;
+}
 controls{margin: 15x 0;}
 arrow{width: 60px;height: 60px; font-size: 24px; font-weight:bold; margin: 4px; cursor: pointer; 
-background-color: rgb(0, 38, 255); border: 2px solid black; color:rgb(38, 0, 255); border-radius: 12px; }
-transition: background-color 0.2s;
+background-color: rgb(30, 99, 226); border: 2px solid black; color:rgb(38, 0, 255); border-radius: 12px; 
+transition: background-color 0.2s; }
+arrow:active{background-color: rgb(0, 38, 255); color: white; }
+#start-btn { padding: 12px 30px; background-color: rgb(30, 99, 226); color: white; border: none; border-radius: 8px;
+font-size: 18px; cursor: pointer; }
