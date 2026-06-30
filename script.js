@@ -7,6 +7,7 @@ let appleIndex = 0;
 let score = 0;
 let timerId = 0;
 let intervalTime = 200;
+
 function createBoard() {
     for (let i = 0; i < 400; i++) {
     const square = document.createElement('div');
@@ -24,10 +25,18 @@ function startGame() {
     currentSnake = [2, 1, 0];
 }
 function move() {
+    const tail = currentSnake.pop();
+    squares [tail].classList.remove('snake');
+
+    squares [tail].classList.remove('snake');
+    const newHead = currentSnake[0] + direction;
+
+    currentSnake.unshift(newHead);
+    squares[newHead].classList.add('snake');
     const hitbottom = (currentSnake[0] + 20 >= 400 && direction === 20);
     const hitTop = (currentSnake[0] - 20 < 0 && direction === -20);
-    const hitright = (currentSnake[0] % 20 === 19 && direction === 1);
-    const hitleft = (currentSnake[0] % 20 === 0 && direction === -1);
+    const hitright = (currentSnake[0] % 20 === 19 && direction === -1);
+    const hitleft = (currentSnake[0] % 20 === 0 && direction === 1);
     const hitSelf = squares[currentSnake[0] + direction]?.classList.contains('snake');
 }
 function generateApple() {
@@ -47,12 +56,11 @@ function changeDir(newDirection) {
 document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowUp') changeDir(-20);
     if (e.key === 'ArrowDown') changeDir(20);
-    if (e.key === 'ArrowLeft') changeDir(-1);
-    if (e.key === 'ArrowRight') changeDir(1);
+    if (e.key === 'ArrowLeft') changeDir(1);
+    if (e.key === 'ArrowRight') changeDir(-1);
 });
 
-
-startGame();
+setInterval(move,200);
 generateApple();
 
        
