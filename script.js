@@ -7,6 +7,18 @@ let appleIndex = 0;
 let score = 0;
 let timerId = 20;
 let intervalTime = 200;
+const eatSound = new Audio('assets/eat.mp3');
+const gameOverSound = new Audio('assets/gameover.mp3');
+
+function playEatSound() {
+    eatSound.currentTime = 0;
+    eatSound.play();
+}
+
+function playGameOverSound() {
+    gameOverSound.play();
+}
+
 
 function createBoard() {
     for (let i = 0; i < 400; i++) {
@@ -50,6 +62,7 @@ function move() {
     currentSnake.unshift(newHead);
     //apple
     if (squares[newHead].classList.contains('apple')) {
+        playEatSound();
         squares[newHead].classList.remove('apple');
         squares[tail].classList.add('snake');
         currentSnake.push(tail);
@@ -102,6 +115,7 @@ if (squares[newHead] .classList.contains('apple')) {
     generateApple();
 }
 function endGame() {
+    playGameOverSound();
     return clearInterval(timerId);
 }
 function handleswipe() {
@@ -121,7 +135,6 @@ function handleswipe() {
         }
     }
 }
-
 
 
 
