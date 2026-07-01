@@ -5,7 +5,7 @@ let currentSnake = [2, 1, 0];
 let direction = 1;
 let appleIndex = 0;
 let score = 0;
-let timerId = 0;
+let timerId = 20;
 let intervalTime = 200;
 
 function createBoard() {
@@ -23,22 +23,53 @@ function startGame() {
     squares[appleIndex].classList.remove('apple');
     clearInterval(timerId);
     currentSnake = [2, 1, 0];
+    score = 0;
+    direction = 1;
+    scoreDisplay.textContent = score;
+    currentSnake.forEach(index => squares[index].classList.add('snake'));
+    generateApple();
+    timerId = setInterval(move, intervalTime);
 }
+
 function move() {
+  
+    const hitbottom = (currentSnake[0] + 20 >= 400 && direction === 20);
+    const hitTop = (currentSnake[0] - 20 < 0 && direction === -20);
+    const hitright = (currentSnake[0] % 20 === 19 && direction === 1);
+    const hitleft = (currentSnake[0] % 20 === 0 && direction === -1);
+    const hitSelf = squares[currentSnake[0] + direction]?.classList.contains('snake');
+    if (hitbottom || hitTop || hitright || hitleft || hitSelf) {
+        return endGame();
+    }
+   
     const tail = currentSnake.pop();
     squares [tail].classList.remove('snake');
 
-    squares [tail].classList.remove('snake');
     const newHead = currentSnake[0] + direction;
-
-    currentSnake.unshift(newHead);
     squares[newHead].classList.add('snake');
-    const hitbottom = (currentSnake[0] + 20 >= 400 && direction === 20);
-    const hitTop = (currentSnake[0] - 20 < 0 && direction === -20);
-    const hitright = (currentSnake[0] % 20 === 19 && direction === -1);
-    const hitleft = (currentSnake[0] % 20 === 0 && direction === 1);
-    const hitSelf = squares[currentSnake[0] + direction]?.classList.contains('snake');
+    currentSnake.unshift(newHead);
+    //apple
+    if (squares[newHead].classList.contains('apple')) {
+        squares[newHead].classList.remove('apple');
+        squares[tail].classList.add('snake');
+        currentSnake.push(tail);
+        score++;
+        scoreDisplay.textContent = score;
+        generateApple();
+    }
+    //swipes
+     document. aaddEventListener ('TouchStart',e => {
+        touchedX = e.changedTouches[0].screenX;
+        touchedY = e.changedTouches[0].screenY;
+        handleswipe();
+    }, false);
+
 }
+
+function changeDir(newDirection) {
+    if (direction + newDirection !== 0) {
+        direction = newDirection;}
+    }
 function generateApple() {
     do {
         appleIndex = Math.floor(Math.random() * squares.length);
@@ -53,17 +84,43 @@ function changeDir(newDirection) {
    }
 }
  //תמיכה במקלדת למחשב
-document.addEventListener('keydown', (e) => {
+document.addEventListener('keydown', (e) => {   
     if (e.key === 'ArrowUp') changeDir(-20);
     if (e.key === 'ArrowDown') changeDir(20);
     if (e.key === 'ArrowLeft') changeDir(1);
     if (e.key === 'ArrowRight') changeDir(-1);
 });
 
-setInterval(move,200);
-generateApple();
 
-       
+
+
+if (squares[newHead] .classList.contains('apple')) {
+    squares[newHead].classList.remove('apple');
+    squares[tail].classList.add('snake');
+    currentSnake.push(tail);
+    score++; scoreDisplay.textContent = score;
+    generateApple();
+}
+function endGame() {
+    return clearInterval(timerId);
+}
+function handleswipe() {
+        const dx = touchEndX - touchedX;
+        const dy = touchEndY - touchedY;
+    
+        const absDx = Math.abs(dx);
+        const absDy = Math.abs(dy);
+
+        if (Math.max(absDx, absDy) > 30) {
+            if (absDx > absDy) {
+                if (dx > 0) changeDir(-1);
+        else changeDir(1);
+        } else {
+            if (dy > 0) changeDir(20);
+            else changeDir(-20);
+        }
+    }
+}
 
 
 
