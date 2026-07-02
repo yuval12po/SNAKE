@@ -28,13 +28,12 @@ body {
 } 
 
 #grid { 
-    width:300px;
-    height:300px;
+  width:300px !important;
+    height:300px !important;
     display: grid; 
     grid-template-columns: repeat(20, 1fr); 
-    width: 90vw;
-    max-width: 400px;
-    height: auto;
+ 
+
     aspect-ratio: 1 / 1;
     margin: 20px auto; 
     border: 4px solid black; 
