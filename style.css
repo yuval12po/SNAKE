@@ -3,6 +3,7 @@ body {
     align-items: center; 
     text-align: center; 
     height: 100vh; 
+    overflow:hidden;
 } 
 
 #h1 { 
@@ -10,8 +11,6 @@ body {
 } 
 
 .game-continer { 
-    width: 95%;
-    max-width: 450px;
     margin: 0 auto; 
     padding: 20px; 
     border: 4px solid black; 
@@ -29,6 +28,8 @@ body {
 } 
 
 #grid { 
+    width:300px;
+    height:300px;
     display: grid; 
     grid-template-columns: repeat(20, 1fr); 
     width: 90vw;
