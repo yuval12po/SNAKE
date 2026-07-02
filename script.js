@@ -74,7 +74,7 @@ function move() {
 
 }
   //swipes
-     document. aaddEventListener ('touchstart',e => {
+     document.addEventListener ('touchstart',e => {
         touchedX = e.changedTouches[0].screenX;
         touchedY = e.changedTouches[0].screenY;
         handleswipe();
@@ -141,6 +141,3 @@ function handleswipe() {
         }
     }
 }
-
-
-
