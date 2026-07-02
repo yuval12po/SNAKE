@@ -2,6 +2,7 @@ body{
     background-image: url('assets/bb.png');
     align-items: center;
     text-align: center;
+    overflow:hidden;
 }
 #h1{
     color:rgb(0, 38, 255);
