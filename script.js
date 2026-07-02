@@ -70,14 +70,20 @@ function move() {
         scoreDisplay.textContent = score;
         generateApple();
     }
-    //swipes
-     document. aaddEventListener ('TouchStart',e => {
+  
+
+}
+  //swipes
+     document. aaddEventListener ('touchstart',e => {
         touchedX = e.changedTouches[0].screenX;
         touchedY = e.changedTouches[0].screenY;
         handleswipe();
     }, false);
-
-}
+    document.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        handleswipe();
+    }, false);
 
 function changeDir(newDirection) {
     if (direction + newDirection !== 0) {
